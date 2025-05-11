@@ -2,12 +2,10 @@
 #include <string.h>
 #include <stdlib.h>
 
-// Global variables
 int restoExist = 0;
 int repasTotal = 0;
 int personTotal = 0;
 
-// Forward structure declarations
 struct Personne {
     int idPersonne;
     char nomPersonne[50];
@@ -35,10 +33,8 @@ struct Resto {
     struct Personne p[20];
 };
 
-// Global restaurant instance
 struct Resto resto;
 
-// Function prototypes
 void afficherTitre();
 void afficherLigne(int length);
 void ajouter();
@@ -46,14 +42,12 @@ void modifier();
 void supprimer();
 void afficher();
 
-// Main function
 int main() {
-    system("chcp 65001 > nul"); // For Unicode support in Windows consoles
+    system("chcp 65001 > nul"); 
     
     int choix;
     
     do {
-        // Clear screen for better UI (works in Windows)
         system("cls");
         
         afficherTitre();
@@ -70,9 +64,8 @@ int main() {
         printf("\nVotre choix: ");
         
         if (scanf("%d", &choix) != 1) {
-            // Clear input buffer in case of invalid input
             while (getchar() != '\n');
-            choix = 0; // Set to invalid choice
+            choix = 0; 
         }
         
         switch (choix) {
@@ -93,8 +86,8 @@ int main() {
                 break;
             default:
                 printf("\nChoix invalide. Appuyez sur Entrée pour continuer...");
-                while (getchar() != '\n'); // Clear input buffer
-                getchar(); // Wait for Enter key
+                while (getchar() != '\n');
+                getchar();
                 break;
         }
     } while (choix != 5);
@@ -102,7 +95,6 @@ int main() {
     return 0;
 }
 
-// Display title function
 void afficherTitre() {
     printf("\n");
     printf(" _____           _   _              ______      ______          _                              _       \n");
@@ -113,8 +105,6 @@ void afficherTitre() {
     printf(" \\____/\\___||___/\\__|_|\\___/|_| |_| |___/ \\___| \\_| \\_\\___||___/\\__\\__,_|\\__,_|_|  \\__,_|_| |_|\\__|___/\n");
     printf("\t\t\t\t\t\t\t\tby @s_modz & @yacine.pdf & @hamza4oudaha\n\n");
 }
-
-// Display horizontal line for UI separation
 void afficherLigne(int length) {
     printf("\n");
     for (int i = 0; i < length; i++) {
@@ -122,8 +112,6 @@ void afficherLigne(int length) {
     }
     printf("\n");
 }
-
-// Add function
 void ajouter() {
     char choix1;
     
@@ -141,7 +129,7 @@ void ajouter() {
             afficherLigne(50);
             
             printf("\nID: ");
-            scanf("%d", &resto.idResto);  // Fixed: Added & operator
+            scanf("%d", &resto.idResto);  
 
             printf("Nom: ");
             scanf(" %[^\n]", resto.nomResto);
@@ -153,7 +141,7 @@ void ajouter() {
             scanf("%d", &resto.nbrEmployer);
 
             printf("Heures de travail: ");
-            scanf("%f", &resto.heureTravaille);  // Fixed: Changed to float and added missing &
+            scanf("%f", &resto.heureTravaille);  
             
             restoExist = 1;
             printf("\nRestaurant ajouté avec succès!\n");
@@ -259,10 +247,10 @@ void ajouter() {
                         scanf(" %[^\n]", resto.p[personTotal].nomPersonne);
 
                         printf("Age: ");
-                        scanf("%d", &resto.p[personTotal].age);  // Fixed: Added missing &
+                        scanf("%d", &resto.p[personTotal].age);  
 
                         printf("Montant Payé: ");
-                        scanf("%f", &resto.p[personTotal].mtPaye);  // Fixed: Changed to float
+                        scanf("%f", &resto.p[personTotal].mtPaye); 
                         
                         personTotal++;
                         printf("\nPersonne ajoutée avec succès!\n");
@@ -291,7 +279,6 @@ void ajouter() {
     }
 }
 
-// Modify function
 void modifier() {
     int choice;
     
@@ -324,7 +311,7 @@ void modifier() {
                     afficherLigne(50);
                     
                     printf("\nID: ");
-                    scanf("%d", &resto.idResto);  // Fixed: Added & operator
+                    scanf("%d", &resto.idResto); 
 
                     printf("Nom: ");
                     scanf(" %[^\n]", resto.nomResto);
@@ -336,7 +323,7 @@ void modifier() {
                     scanf("%d", &resto.nbrEmployer);
 
                     printf("Heures de travail: ");
-                    scanf("%f", &resto.heureTravaille);  // Fixed: Changed to float and added missing &
+                    scanf("%f", &resto.heureTravaille);  
                     
                     printf("\nModification réussie!\n");
                 }
@@ -351,8 +338,6 @@ void modifier() {
                     printf("\nAucun repas à modifier.\n");
                 } else {
                     int repasMod;
-                    
-                    // Display existing meals for reference
                     printf("\nRepas existants:\n");
                     for (int i = 0; i < repasTotal; i++) {
                         printf("%d. %s\n", i+1, resto.r[i].nom);
@@ -411,8 +396,6 @@ void modifier() {
                     printf("\nAucune personne à modifier.\n");
                 } else {
                     int persoMod;
-                    
-                    // Display existing people for reference
                     printf("\nPersonnes existantes:\n");
                     for (int i = 0; i < personTotal; i++) {
                         printf("%d. %s\n", i+1, resto.p[i].nomPersonne);
@@ -424,7 +407,7 @@ void modifier() {
                     if (persoMod < 1 || persoMod > personTotal) {
                         printf("\nNuméro de personne invalide.\n");
                     } else {
-                        int index = persoMod - 1;  // Adjust for array index
+                        int index = persoMod - 1; 
                         
                         system("cls");
                         afficherTitre();
@@ -471,8 +454,6 @@ void modifier() {
         }
     } while (choice != 4);
 }
-
-// Delete function
 void supprimer() {
     int choice;
     
@@ -521,8 +502,6 @@ void supprimer() {
                     printf("\nAucun repas à supprimer.\n");
                 } else {
                     int repasSup;
-                    
-                    // Display existing meals for reference
                     printf("\nRepas existants:\n");
                     for (int i = 0; i < repasTotal; i++) {
                         printf("%d. %s\n", i+1, resto.r[i].nom);
@@ -534,15 +513,12 @@ void supprimer() {
                     if (repasSup < 1 || repasSup > repasTotal) {
                         printf("\nNuméro de repas invalide.\n");
                     } else {
-                        int index = repasSup - 1;  // Adjust for array index
-                        
-                        // Ask for confirmation
+                        int index = repasSup - 1; 
                         char confirm;
                         printf("\nÊtes-vous sûr de vouloir supprimer '%s'? (O/N): ", resto.r[index].nom);
                         scanf(" %c", &confirm);
                         
                         if (confirm == 'O' || confirm == 'o') {
-                            // Shift elements to the left
                             for (int i = index; i < repasTotal - 1; i++) {
                                 resto.r[i] = resto.r[i + 1];
                             }
@@ -564,8 +540,6 @@ void supprimer() {
                     printf("\nAucune personne à supprimer.\n");
                 } else {
                     int persoSup;
-                    
-                    // Display existing people for reference
                     printf("\nPersonnes existantes:\n");
                     for (int i = 0; i < personTotal; i++) {
                         printf("%d. %s\n", i+1, resto.p[i].nomPersonne);
@@ -577,15 +551,12 @@ void supprimer() {
                     if (persoSup < 1 || persoSup > personTotal) {
                         printf("\nNuméro de personne invalide.\n");
                     } else {
-                        int index = persoSup - 1;  // Adjust for array index
-                        
-                        // Ask for confirmation
+                        int index = persoSup - 1;  
                         char confirm;
                         printf("\nÊtes-vous sûr de vouloir supprimer '%s'? (O/N): ", resto.p[index].nomPersonne);
                         scanf(" %c", &confirm);
                         
                         if (confirm == 'O' || confirm == 'o') {
-                            // Shift elements to the left
                             for (int i = index; i < personTotal - 1; i++) {
                                 resto.p[i] = resto.p[i + 1];
                             }
@@ -616,7 +587,6 @@ void supprimer() {
     } while (choice != 4);
 }
 
-// Display function
 void afficher() {
     system("cls");
     afficherTitre();
