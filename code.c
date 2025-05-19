@@ -349,7 +349,7 @@ void modifier() {
                     if (repasMod < 1 || repasMod > repasTotal) {
                         printf("\nNuméro de repas invalide.\n");
                     } else {
-                        int index = repasMod - 1;  // Adjust for array index
+                        int index = repasMod - 1;  
                         
                         system("cls");
                         afficherTitre();
